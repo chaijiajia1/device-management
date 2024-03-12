@@ -1,0 +1,6 @@
+
+mosquitto_pub -h localhost -t "device/A" -m "{\"timestamp\":\"2023-11-10\",\"location\":{\"latitude\":\"90\",\"longitude\":\"10\"},\"status\":\"normal\",\"data\":\"helloA\",\"active\":\"no\"}"
+
+mosquitto_pub -h localhost -t "device/A" -m "{\"timestamp\":\"2023-11-13\",\"location\":{\"latitude\":\"40\",\"longitude\":\"60\"},\"status\":\"normal\",\"data\":\"helloA\",\"active\":\"no\"}"
+
+mosquitto_pub -h localhost -t "device/A" -m "{\"timestamp\":\"2023-11-15\",\"location\":{\"latitude\":\"30\",\"longitude\":\"120\"},\"status\":\"normal\",\"data\":\"helloA\",\"active\":\"yes\"}"

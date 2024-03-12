@@ -1,0 +1,41 @@
+version: '3.8'
+services:
+  project:
+    build:
+      context: ./project
+      dockerfile: dockerfile_front
+    ports:
+      - "8080:80"
+
+  back:
+    build:
+      context: ./back
+      dockerfile: dockerfile_back
+    depends_on:
+      - mysql
+    ports:
+      - "8443:8443"
+# 定义 Mosquitto MQTT 代理服务
+  mosquitto:
+    image: eclipse-mosquitto
+    ports:
+      - "1883:1883"
+    volumes:
+      - ./mosquitto-config/mosquitto.conf:/mosquitto/config/mosquitto.conf
+  mos_python:
+    build:
+      context: ./mos_python
+      dockerfile: dockerfile_mos
+    depends_on:
+      - mysql
+      - mosquitto
+    
+  mysql:
+    image: mysql:5.7  # 或者您选择的任何其他版本
+    environment:
+      MYSQL_DATABASE: 'bs'  # 您的数据库名
+      MYSQL_USER: 'new_user'  # 数据库用户
+      MYSQL_PASSWORD: 'Cjq760310!'  # 用户密码
+      MYSQL_ROOT_PASSWORD: 'Cjq760310!'  # root 用户的密码
+    ports:
+      - "3307:3306"
